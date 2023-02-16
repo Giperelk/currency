@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from main.views import hello_world
+from currency.views import list_rates, contactus_list
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello-world/', hello_world)
+    path('rate/list/', list_rates),
+    path('contactus/list/', contactus_list),
 ]
