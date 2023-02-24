@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Contact Us
+{% endblock title %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Email</th>
+        <th>Subject</th>
+        <th>Message</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.email_from }}</td>
+        <td>{{ task.subject }}</td>
+        <td>{{ task.message }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
