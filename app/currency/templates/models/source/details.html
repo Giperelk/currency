@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Source
+{% endblock title %}
+
+{% block content %}
+    ID: {{ source.id }}<br>
+    URL: {{ source.source_url }}<br>
+    Name: {{ source.name }}<br>
+    Phone number: {{ source.phone_number }}<br>
+    Email: {{ source.contact_email }}<br>
+    <a href="/source/{{ source.id }}/update/">Update</a>
+    <a href="/source/{{ source.id }}/delete/">Delete</a><br>
+{% endblock content %}

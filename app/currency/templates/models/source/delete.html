@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Source
+{% endblock title %}
+
+{% block content %}
+
+    Do you really want to delete source with id {{ source.id }}
+    {% include 'includes/forms/delete_form.html' %}
+
+{% endblock content %}

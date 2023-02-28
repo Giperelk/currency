@@ -41,6 +41,7 @@ DJANGO_APPS = [
 
 EXTERNAL_APPS = [
     'django_extensions',
+    'phonenumber_field'
 ]
 
 INTERNAL_APPS = [

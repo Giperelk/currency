@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete ContactUs
+{% endblock title %}
+
+{% block content %}
+
+    Do you really want to delete contactus with id {{ contactus.id }}
+    {% include 'includes/forms/delete_form.html' %}
+
+{% endblock content %}
