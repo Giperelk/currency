@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    ContactUs
+{% endblock title %}
+
+{% block content %}
+    ID: {{ task.id }}<br>
+    Email: {{ task.email_from }}<br>
+    Subject: {{ task.subject }}<br>
+    Message: {{ task.message }}<br>
+    <a href="/contactus/{{ task.id }}/update/">Update</a>
+    <a href="/contactus/{{ task.id }}/delete/">Delete</a><br>
+{% endblock content %}
