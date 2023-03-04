@@ -11,6 +11,6 @@
     Source: {{ rate.source }}<br>
     Currency: {{ rate.currency }}<br>
     Created: {{ rate.created }}<br>
-    <a href="/rate/{{ rate.id }}/update/">Update</a>
-    <a href="/rate/{{ rate.id }}/delete/">Delete</a><br>
+    <a href="{% url 'currency:rate-update' rate.id %}">Update</a>
+    <a href="{% url 'currency:rate-delete' rate.id %}">Delete</a><br>
 {% endblock content %}

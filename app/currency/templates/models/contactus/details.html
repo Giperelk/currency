@@ -5,10 +5,10 @@
 {% endblock title %}
 
 {% block content %}
-    ID: {{ task.id }}<br>
-    Email: {{ task.email_from }}<br>
-    Subject: {{ task.subject }}<br>
-    Message: {{ task.message }}<br>
-    <a href="/contactus/{{ task.id }}/update/">Update</a>
-    <a href="/contactus/{{ task.id }}/delete/">Delete</a><br>
+    ID: {{ contactus.id }}<br>
+    Email: {{ contactus.email_from }}<br>
+    Subject: {{ contactus.subject }}<br>
+    Message: {{ contactus.message }}<br>
+    <a href="{% url 'currency:contactus-update' contactus.id %}">Update</a>
+    <a href="{% url 'currency:contactus-delete' contactus.id %}">Delete</a><br>
 {% endblock content %}

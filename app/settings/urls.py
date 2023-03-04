@@ -14,61 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from currency.views import (
-    rate_all, rate_create, rate_details, rate_update, rate_delete,
 
-    contactus_all, contactus_create, contactus_details, contactus_update, contactus_delete,
-
-    source_all, source_create, source_details, source_update, source_delete,
-)
-
-'''
-    DJANGO PATTERNS
-'''
-
-# django patterns
-django_pattens = [
+urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('__debug__/', include('debug_toolbar.urls')),
+
+    path('currency/', include('currency.urls'))
 ]
-
-'''
-    CURRENCY PATTERNS
-'''
-
-# rate currency patterns
-rate_currency_patterns = [
-    path('rate/all/', rate_all),
-    path('rate/<int:pk>/', rate_details),
-    path('rate/create/', rate_create),
-    path('rate/<int:pk>/update/', rate_update),
-    path('rate/<int:pk>/delete/', rate_delete),
-]
-
-# contact us currency patterns
-contact_us_currency_patterns = [
-    path('contactus/all/', contactus_all),
-    path('contactus/<int:pk>/', contactus_details),
-    path('contactus/create/', contactus_create),
-    path('contactus/<int:pk>/update/', contactus_update),
-    path('contactus/<int:pk>/delete/', contactus_delete),
-]
-
-# source currency patterns
-source_currency_patterns = [
-    path('source/all/', source_all),
-    path('source/<int:pk>/', source_details),
-    path('source/create/', source_create),
-    path('source/<int:pk>/update/', source_update),
-    path('source/<int:pk>/delete/', source_delete),
-]
-
-# currency patterns
-currency_patterns = rate_currency_patterns + contact_us_currency_patterns + source_currency_patterns
-
-"""
-        URLPATTERNS
-"""
-
-urlpatterns = django_pattens + currency_patterns
