@@ -1,6 +1,7 @@
 Django==4.1.7
 django-extensions==3.2.1
 django-phonenumber-field==7.0.2
+django-debug-toolbar
 ipython
 
 #flake8

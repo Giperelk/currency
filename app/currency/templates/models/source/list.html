@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<a href="/source/create/">Create</a><br>
+<a href="{% url 'currency:source-create' %}">Create</a><br>
 
 <table>
     <tr>
@@ -19,16 +19,16 @@
         <th></th>
         <th></th>
     </tr>
-    {% for source in sources %}
+    {% for source in object_list %}
     <tr>
         <td>{{ source.id }}</td>
         <td>{{ source.source_url }}</td>
         <td>{{ source.name }}</td>
         <td>{{ source.phone_number }}</td>
         <td>{{ source.contact_email }}</td>
-        <td><a href="/source/{{ source.id }}/">Details</a></td>
-        <td><a href="/source/{{ source.id }}/update/">Update</a></td>
-        <td><a href="/source/{{ source.id }}/delete/">Delete</a></td>
+        <td><a href="{% url 'currency:source-details' source.id %}">Details</a></td>
+        <td><a href="{% url 'currency:source-update' source.id %}">Update</a></td>
+        <td><a href="{% url 'currency:source-delete' source.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>
