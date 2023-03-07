@@ -42,7 +42,9 @@ DJANGO_APPS = [
 EXTERNAL_APPS = [
     'django_extensions',
     'phonenumber_field',
-    'debug_toolbar'
+    'debug_toolbar',
+    'rangefilter',
+    'import_export',
 ]
 
 INTERNAL_APPS = [

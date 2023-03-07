@@ -1,3 +1,4 @@
+from currency import choices as mch
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -5,10 +6,16 @@ from phonenumber_field.modelfields import PhoneNumberField
 class Rate(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
-    currency = models.CharField(max_length=25)
+    currency = models.PositiveSmallIntegerField(
+        choices=mch.RateCurrencyChoices.choices,
+        default=mch.RateCurrencyChoices.EUR
+    )
     buy = models.DecimalField(max_digits=8, decimal_places=2)
     sell = models.DecimalField(max_digits=8, decimal_places=2)
     source = models.CharField(max_length=25, default='')
+
+    def __str__(self):
+        return f'Source {{{self.source}}} on {self.created} for {self.get_currency_display()}'
 
 
 class ContactUs(models.Model):
@@ -17,6 +24,9 @@ class ContactUs(models.Model):
     subject = models.CharField(max_length=100)
     message = models.TextField()
 
+    def __str__(self):
+        return f'From user {{{self.email_from}}} about "{self.subject}"'
+
 
 class Source(models.Model):
 
@@ -24,3 +34,6 @@ class Source(models.Model):
     name = models.CharField(max_length=64)
     phone_number = PhoneNumberField(blank=True)
     contact_email = models.EmailField(blank=True)
+
+    def __str__(self):
+        return f'{self.name}'
