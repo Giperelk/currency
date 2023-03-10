@@ -61,7 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'currency.middlewares.RequestResponseLogTimeMiddleware'
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -136,6 +137,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 if DEBUG:
     import socket
