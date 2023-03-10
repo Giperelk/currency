@@ -37,3 +37,13 @@ class Source(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class RequestResponseLog(models.Model):
+
+    path = models.CharField(max_length=150)
+    request_method = models.PositiveSmallIntegerField(
+        choices=mch.RateRequestResponseLogChoices.choices,
+        default=mch.RateRequestResponseLogChoices.GET
+    )
+    time = models.PositiveIntegerField()
