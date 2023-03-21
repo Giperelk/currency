@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.conf import settings
 
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, ContactUsForm, SourceForm
@@ -66,7 +67,7 @@ class ContactUsCreateView(CreateView):
         redirect = super().form_valid(form)
         from django.core.mail import send_mail
         subject = 'Contact Us'
-        recipient = 'example@test.com'
+        recipient = settings.DEFAULT_FROM_EMAIL
         message = f"""
         Reply to email: {cleaned_data['email_from']}
         Subject: {cleaned_data['subject']}
