@@ -1,5 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, ContactUsForm, SourceForm
@@ -10,28 +12,37 @@ class RateListView(ListView):
     template_name = 'models/rate/list.html'
 
 
-class RateDetailsView(DetailView):
+class RateDetailsView(LoginRequiredMixin, DetailView):
     queryset = Rate.objects.all()
     template_name = 'models/rate/details.html'
 
 
-class RateCreateView(CreateView):
+class RateCreateView(UserPassesTestMixin, CreateView):
     form_class = RateForm
     template_name = 'models/rate/create.html'
     success_url = reverse_lazy('currency:rate-list')
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class RateUpdateView(UpdateView):
+
+class RateUpdateView(UserPassesTestMixin, UpdateView):
     form_class = RateForm
     template_name = 'models/rate/update.html'
     success_url = reverse_lazy('currency:rate-list')
     queryset = Rate.objects.all()
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class RateDeleteView(DeleteView):
+
+class RateDeleteView(UserPassesTestMixin, DeleteView):
     queryset = Rate.objects.all()
     template_name = 'models/rate/delete.html'
     success_url = reverse_lazy('currency:rate-list')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class ContactUsListView(ListView):
@@ -112,3 +123,17 @@ class SourceDeleteView(DeleteView):
     queryset = Source.objects.all()
     template_name = 'models/source/delete.html'
     success_url = reverse_lazy('currency:source-list')
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    template_name = 'registration/profile.html'
+    success_url = reverse_lazy('currency:rate-list')
+    model = get_user_model()
+    queryset = get_user_model().objects.all()
+    fields = (
+        'first_name',
+        'last_name',
+    )
+
+    def get_object(self, queryset=None):
+        return self.request.user

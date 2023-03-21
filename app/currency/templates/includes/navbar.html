@@ -2,4 +2,14 @@
     <a href="{% url 'currency:rate-list' %}">Rates</a>
     <a href="{% url 'currency:contactus-list' %}">Contact Us</a>
     <a href="{% url 'currency:source-list' %}">Sources</a>
+
+    {% if request.user.is_anonymous %}
+    <a href="#">Sign Up</a>
+    <a href="{% url 'login' %}">Login</a>
+    {% else %}
+    <a href="{% url 'logout' %}">Logout</a>
+    <a href="{% url 'profile' %}">Profile</a>
+    <br>
+    Welcome, {{ request.user.email }}
+    {% endif %}
 </p>
