@@ -12,7 +12,7 @@ class Rate(models.Model):
     )
     buy = models.DecimalField(max_digits=8, decimal_places=2)
     sell = models.DecimalField(max_digits=8, decimal_places=2)
-    source = models.CharField(max_length=25, default='')
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE, related_name='rates')
 
     def __str__(self):
         return f'Source {{{self.source}}} on {self.created} for {self.get_currency_display()}'
