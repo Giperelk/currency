@@ -49,7 +49,8 @@ EXTERNAL_APPS = [
 ]
 
 INTERNAL_APPS = [
-    'currency'
+    'currency',
+    'account'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + INTERNAL_APPS
@@ -141,13 +142,20 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DEFAULT_FROM_EMAIL = 'test@example.com'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = reverse_lazy('currency:rate-list')
 LOGOUT_REDIRECT_URL = reverse_lazy('currency:rate-list')
 LOGIN_URL = reverse_lazy('login')
 
+AUTH_USER_MODEL = 'account.User'
+
 if DEBUG:
     import socket
     hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
     INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
+
+HOST = 'localhost:8000'
+HTTP_SCHEMA = 'http'
