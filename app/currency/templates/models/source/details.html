@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
     Source
 {% endblock title %}
 
 {% block content %}
     ID: {{ source.id }}<br>
+    <img src="{{ source.logo_url }}" width="40" height="40"> Name: {{ source.name }}<br>
     URL: {{ source.source_url }}<br>
-    Name: {{ source.name }}<br>
     Phone number: {{ source.phone_number }}<br>
     Email: {{ source.contact_email }}<br>
     <a href="{% url 'currency:source-update' source.id %}">Update</a>

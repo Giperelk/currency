@@ -34,5 +34,6 @@ class SourceForm(forms.ModelForm):
             'source_url',
             'name',
             'phone_number',
-            'contact_email'
+            'contact_email',
+            'logo'
         )

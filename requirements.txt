@@ -6,6 +6,9 @@ django-admin-rangefilter
 django-import-export
 ipython
 
+django-crispy-forms
+crispy_bootstrap5
+
 #flake8
 flake8
 flake8-builtins
