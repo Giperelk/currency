@@ -17,7 +17,7 @@
         <th>Created</th>
         <th>Currency</th>
         <th>Buy</th>
-        <th>Sell</th>
+        <th>Sale</th>
         <th>Source</th>
         {% if request.user.is_authenticated %}
         <th></th>
@@ -33,7 +33,7 @@
         <td>{{ rate.created }}</td>
         <td>{{ rate.get_currency_display }}</td>
         <td>{{ rate.buy }}</td>
-        <td>{{ rate.sell }}</td>
+        <td>{{ rate.sale }}</td>
         <td><img src="{{ rate.source.logo_url }}" width="40" height="40">{{ rate.source }}</td>
         {% if request.user.is_authenticated %}
         <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
