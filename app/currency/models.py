@@ -12,7 +12,7 @@ class Rate(models.Model):
         default=mch.RateCurrencyChoices.EUR
     )
     buy = models.DecimalField(max_digits=8, decimal_places=2)
-    sell = models.DecimalField(max_digits=8, decimal_places=2)
+    sale = models.DecimalField(max_digits=8, decimal_places=2)
     source = models.ForeignKey('currency.Source', on_delete=models.CASCADE, related_name='rates')
 
     def __str__(self):
@@ -37,6 +37,7 @@ class Source(models.Model):
 
     source_url = models.URLField(max_length=255)
     name = models.CharField(max_length=64)
+    code_name = models.CharField(max_length=64, unique=True)
     phone_number = PhoneNumberField(blank=True)
     contact_email = models.EmailField(blank=True)
     logo = models.FileField(
