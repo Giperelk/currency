@@ -1,9 +1,14 @@
 import requests
+
 from celery import shared_task
 from currency.choices import RateCurrencyChoices
 from currency.constants import (
+    # PRIVATBANK
     PRIVATBANK_CODE_NAME, PRIVATBANK_URL,
-    MONOBANK_CODE_NAME, MONOBANK_URL
+    # MONOBANK
+    MONOBANK_CODE_NAME, MONOBANK_URL,
+    # CURRENCY CODES
+    UAH_CURRENCY_CODE, USD_CURRENCY_CODE, EUR_CURRENCY_CODE
 )
 from currency.utils import to_2_point_decimal, get_or_create_source, create_rate_if_not_exist
 
@@ -54,11 +59,11 @@ def parse_monobank():
     available_currencies = {
         'USD': {
             'choice': RateCurrencyChoices.USD,
-            'numeric_code': 840,
+            'numeric_code': USD_CURRENCY_CODE,
         },
         'EUR': {
             'choice': RateCurrencyChoices.EUR,
-            'numeric_code': 978,
+            'numeric_code': EUR_CURRENCY_CODE,
         },
     }
 
@@ -69,7 +74,7 @@ def parse_monobank():
 
     for rate in rates:
         for currency_key, currency in available_currencies.items():
-            if currency['numeric_code'] == rate['currencyCodeA']:
+            if currency['numeric_code'] == rate['currencyCodeA'] and rate['currencyCodeB'] == UAH_CURRENCY_CODE:
                 buy = to_2_point_decimal(rate["rateBuy"])
                 sale = to_2_point_decimal(rate["rateSell"])
                 currency = currency_key
@@ -86,3 +91,15 @@ def parse_monobank():
 def parse_sources():
     parse_privatbank.delay()
     parse_monobank.delay()
+
+
+@shared_task
+def send_mail(subject, message, recipient_list, from_email, fail_silently):
+    from django.core.mail import send_mail
+    send_mail(
+        subject=subject,
+        message=message,
+        from_email=from_email,
+        recipient_list=recipient_list,
+        fail_silently=fail_silently
+    )

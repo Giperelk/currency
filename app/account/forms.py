@@ -5,6 +5,8 @@ from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.urls import reverse
 
+from currency.tasks import send_mail
+
 
 User = get_user_model()
 
@@ -17,6 +19,7 @@ class UserSignUpForm(forms.ModelForm):
         model = User
         fields = (
             'email',
+            'phone',
             'password1',
             'password2'
         )
@@ -52,8 +55,7 @@ class UserSignUpForm(forms.ModelForm):
             {settings.HTTP_SCHEMA}://{settings.HOST}{path}
         """
 
-        from django.core.mail import send_mail
-        send_mail(
+        send_mail.delay(
             subject=subject,
             message=message,
             from_email=recipient,
