@@ -10,6 +10,8 @@
 
 <a href="{% url 'currency:source-create' %}">Create</a><br>
 
+{% include 'includes/filter_form.html' %}<br>
+
 <table>
     <tr>
         <th>Id</th>
@@ -34,5 +36,7 @@
     </tr>
     {% endfor %}
 </table>
+
+{% include 'includes/paginator.html' %}
 
 {% endblock content %}

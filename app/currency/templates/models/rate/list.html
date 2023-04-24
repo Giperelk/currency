@@ -10,6 +10,7 @@
 
 <a href="{% url 'currency:rate-create' %}">Create</a><br>
 
+{% include 'includes/filter_form.html' %}<br>
 
 <table>
     <tr>
@@ -45,5 +46,7 @@
     </tr>
     {% endfor %}
 </table>
+
+{% include 'includes/paginator.html' %}
 
 {% endblock content %}

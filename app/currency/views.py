@@ -1,16 +1,23 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.conf import settings
+from django_filters.views import FilterView
 
+from currency.mixins import ModifiedPagesMixin
 from currency.models import Rate, ContactUs, Source
 from currency.forms import RateForm, ContactUsForm, SourceForm
+from currency.tasks import send_mail
+from currency.filters import RateFilter, SourceFilter, ContactUsFilter
 
 
-class RateListView(ListView):
+class RateListView(ModifiedPagesMixin, FilterView):
+    paginate_by = 10
     queryset = Rate.objects.all().select_related('source')
     template_name = 'models/rate/list.html'
+
+    filterset_class = RateFilter
 
 
 class RateDetailsView(LoginRequiredMixin, DetailView):
@@ -46,9 +53,12 @@ class RateDeleteView(UserPassesTestMixin, DeleteView):
         return self.request.user.is_superuser
 
 
-class ContactUsListView(ListView):
+class ContactUsListView(ModifiedPagesMixin, FilterView):
+    paginate_by = 10
     queryset = ContactUs.objects.all()
     template_name = 'models/contactus/list.html'
+
+    filterset_class = ContactUsFilter
 
 
 class ContactUsDetailsView(DetailView):
@@ -65,22 +75,23 @@ class ContactUsCreateView(CreateView):
 
         cleaned_data = form.cleaned_data
         redirect = super().form_valid(form)
-        from django.core.mail import send_mail
+
         subject = 'Contact Us'
         recipient = settings.DEFAULT_FROM_EMAIL
         message = f"""
-        Reply to email: {cleaned_data['email_from']}
-        Subject: {cleaned_data['subject']}
-        Body: {cleaned_data['message']}
-        """
+                    Reply to email: {cleaned_data['email_from']}
+                    Subject: {cleaned_data['subject']}
+                    Body: {cleaned_data['message']}
+                    """
 
-        send_mail(
+        send_mail.delay(
             subject=subject,
-            message=message,
             from_email=recipient,
             recipient_list=[recipient],
+            message=message,
             fail_silently=False
         )
+
         return redirect
 
 
@@ -97,9 +108,12 @@ class ContactUsDeleteView(DeleteView):
     success_url = reverse_lazy('currency:contactus-list')
 
 
-class SourceListView(ListView):
+class SourceListView(ModifiedPagesMixin, FilterView):
+    paginate_by = 10
     queryset = Source.objects.all()
     template_name = 'models/source/list.html'
+
+    filterset_class = SourceFilter
 
 
 class SourceDetailsView(DetailView):
