@@ -7,11 +7,11 @@ class RateFilter(django_filters.FilterSet):
 
     class Meta:
         model = Rate
-        fields = [
-            'buy',
-            'sale',
-            'currency',
-        ]
+        fields = {
+            'buy': ('gt', 'gte', 'lt', 'lte', 'exact'),
+            'sale': ('gt', 'gte', 'lt', 'lte', 'exact'),
+            'currency': ('exact', ),
+        }
 
 
 class SourceFilter(django_filters.FilterSet):
@@ -27,6 +27,6 @@ class ContactUsFilter(django_filters.FilterSet):
 
     class Meta:
         model = ContactUs
-        fields = [
-            'subject',
-        ]
+        fields = {
+            'subject': ('exact', 'icontains', 'iregex')
+        }
