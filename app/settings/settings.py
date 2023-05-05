@@ -50,6 +50,9 @@ EXTERNAL_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_filters',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'drf_yasg',
 ]
 
 INTERNAL_APPS = [
@@ -179,4 +182,14 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'currency.tasks.parse_sources',
         'schedule': crontab(minute='*/30')
     }
+}
+
+# REST FRAMEWORK
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+   ),
+   'DEFAULT_PERMISSION_CLASSES': (
+       'rest_framework.permissions.IsAuthenticated',
+   ),
 }
