@@ -24,8 +24,11 @@ class SourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Source
         fields = (
+            'source_url',
             'name',
-            'source_url'
+            'code_name',
+            'phone_number',
+            'contact_email',
         )
 
 

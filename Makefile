@@ -24,3 +24,6 @@ worker:
 
 beat:
 	cd app && celery -A settings worker -l info
+
+pytest:
+	pytest ./app/tests --cov=app --cov-report html

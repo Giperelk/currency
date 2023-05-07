@@ -1,0 +1,20 @@
+[
+  {
+    "model": "account.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$390000$WC0XUnARsnMHc6SaoA5ff4$h80GlFl+3Nf+E80jt2TdYLlF64nnjoenli9Qb5eUeYU=",
+      "last_login": "2023-04-14T10:50:29.352Z",
+      "is_superuser": false,
+      "username": "6916163a-79dd-411c-a88e-d83c0bf19d85",
+      "first_name": "testphone@testphone.testphone",
+      "last_name": "testphone@testphone.testphone",
+      "is_staff": false, "is_active": true,
+      "date_joined": "2023-04-13T11:47:53.020Z",
+      "email": "testphone@testphone.testphone",
+      "phone": "380978062218",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
