@@ -1,0 +1,14 @@
+[
+  {
+    "model": "currency.source",
+    "pk": 1,
+    "fields": {
+      "source_url": "https://privat24.com.ua",
+      "name": "privat",
+      "code_name": "privat",
+      "phone_number": "",
+      "contact_email": "",
+      "logo": ""
+    }
+  }
+]

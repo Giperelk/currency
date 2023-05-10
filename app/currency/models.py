@@ -41,7 +41,7 @@ class Source(models.Model):
     phone_number = PhoneNumberField(blank=True)
     contact_email = models.EmailField(blank=True)
     logo = models.FileField(
-        default=True,
+        default='',
         null=True,
         blank=True,
         upload_to=source_logo_path

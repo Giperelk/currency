@@ -1,18 +1,14 @@
-from django.urls import path
-
-from currency.api.views import RateViewSet, ContactUsViewSet, SourceApiView
+from currency.api.views import RateViewSet, ContactUsViewSet, SourceViewSet
 from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register('rates', RateViewSet, basename='rates')
+router.register('contactus', ContactUsViewSet, basename='contactus')
+router.register('sources', SourceViewSet, basename='sources')
 
 app_name = 'api-currency'
 
-urlpatterns = [
-    path('sources/', SourceApiView.as_view(), name='sources'),
-]
+urlpatterns = []
 
-for view_set, base_name in (
-        (RateViewSet, 'rates'),
-        (ContactUsViewSet, 'contactus')
-):
-    router = DefaultRouter()
-    router.register(base_name, view_set, basename=base_name)
-    urlpatterns += router.urls
+urlpatterns += router.urls
