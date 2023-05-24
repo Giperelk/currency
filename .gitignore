@@ -4,3 +4,4 @@ venv
 *.sqlite3
 .coverage
 __pycache__
+local.py
