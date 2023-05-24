@@ -12,6 +12,8 @@ drf-yasg==1.21.5
 ipython
 gunicorn
 
+psycopg2-binary
+
 requests==2.28.2
 
 django-crispy-forms
