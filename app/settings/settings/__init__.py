@@ -1,4 +1,4 @@
 try:
-    from .local import *
+    from .local import *  # noqa: F401, F403
 except ImportError:
-    from .base import *
+    from .base import *  # noqa: F401, F403

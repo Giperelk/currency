@@ -925,5 +925,3 @@ MONOBANK_DATA = [
             "rateCross": 0.0021,
             "rateSell": 0}
     ]
-
-
