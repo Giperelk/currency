@@ -27,3 +27,6 @@ beat:
 
 pytest:
 	pytest ./app/tests --cov=app --cov-report html
+
+docker_compose:
+	docker-compose up -d --build
