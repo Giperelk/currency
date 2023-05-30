@@ -159,7 +159,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR.parent / 'static_content' / 'static'
+# STATIC_ROOT = BASE_DIR.parent / 'static_content' / 'static'
+STATIC_ROOT = '/tmp/static'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR.parent / 'static_content' / 'media'
@@ -200,14 +201,14 @@ CELERY_BROKER_URL = 'amqp://{0}:{1}@{2}:{3}//'.format(
 CELERY_BEAT_SCHEDULE = {
     'debug': {
         'task': 'currency.tasks.parse_sources',
-        'schedule': crontab(minute='*/30')
+        'schedule': crontab(minute='*/1')
     }
 }
 
 CACHES = {
     'default': {
         "BACKEND": "django.core.cache.backends.memcached.PyMemcacheCache",
-        "LOCATION": "127.0.0.1:11211",
+        "LOCATION": f"{env.str('CACHES_DEFAULT_HOST', 'localhost')}:{env.str('CACHES_DEFAULT_PORT', '11211')}",
     }
 }
 
