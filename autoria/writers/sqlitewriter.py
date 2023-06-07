@@ -43,5 +43,3 @@ class SQLiteWriter(ABCWriter):
 
 if __name__ == '__main__':
     sqlwriter = SQLiteWriter('tutorial.db', ['car_id', 'data_link_to_view'])
-
-

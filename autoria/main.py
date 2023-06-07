@@ -24,7 +24,5 @@ def main():
             writer.write_detail((ar_id, title, price, km))
 
 
-
-
 if __name__ == '__main__':
     main()

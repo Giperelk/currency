@@ -46,9 +46,6 @@ class AutoRiaScrapper:
     def get_info(page: int, size: int = 100):
         result = []
         while True:
-
-            print(page)
-
             page_content = AutoRiaScrapper._get_info_page_content(page, size)
             soup = BeautifulSoup(page_content, features="html.parser")
 
@@ -68,4 +65,3 @@ class AutoRiaScrapper:
                 result.append((car_id, data_link_to_view))
 
         return result
-
